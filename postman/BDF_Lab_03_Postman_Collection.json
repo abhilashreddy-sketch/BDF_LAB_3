@@ -1,0 +1,361 @@
+{
+  "info": {
+    "_postman_id": "bdf-lab-03-aurora-univ",
+    "name": "BDF Lab 03 - REST API & Query Parameters",
+    "description": "Postman API test collection for Aurora University BDF Lab 3 (Student: Appampally Abhilash Reddy). Covers REST CRUD endpoints, query parameters, sorting, pagination, filtering, input validation, and HTTP status codes.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "01. GET All Books",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books",
+          "host": ["{{baseUrl}}"],
+          "path": ["books"]
+        }
+      }
+    },
+    {
+      "name": "02. GET Book by ID (Existing)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", "1"]
+        }
+      }
+    },
+    {
+      "name": "03. GET Book by ID (Non-existent - 404)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/9999",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", "9999"]
+        }
+      }
+    },
+    {
+      "name": "04. POST Create Book (Valid - 201)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Mastering TypeScript\",\n  \"author\": \"Boris Cherny\",\n  \"price\": 550\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books",
+          "host": ["{{baseUrl}}"],
+          "path": ["books"]
+        }
+      }
+    },
+    {
+      "name": "05. POST Create Book (Missing Title - 400)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"author\": \"Boris Cherny\",\n  \"price\": 550\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books",
+          "host": ["{{baseUrl}}"],
+          "path": ["books"]
+        }
+      }
+    },
+    {
+      "name": "06. POST Create Book (Missing Author - 400)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Mastering TypeScript\",\n  \"price\": 550\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books",
+          "host": ["{{baseUrl}}"],
+          "path": ["books"]
+        }
+      }
+    },
+    {
+      "name": "07. POST Create Book (Non-numeric Price - 400)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Mastering TypeScript\",\n  \"author\": \"Boris Cherny\",\n  \"price\": \"free\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books",
+          "host": ["{{baseUrl}}"],
+          "path": ["books"]
+        }
+      }
+    },
+    {
+      "name": "08. PUT Update Book (Valid - 200)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Python Programming - Second Edition\",\n  \"author\": \"John Smith\",\n  \"price\": 499\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books/1",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", "1"]
+        }
+      }
+    },
+    {
+      "name": "09. PUT Update Book (Non-existent - 404)",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Ghost Book\",\n  \"author\": \"Anonymous\",\n  \"price\": 100\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/books/9999",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", "9999"]
+        }
+      }
+    },
+    {
+      "name": "10. DELETE Book (Existing - 200)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/2",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", "2"]
+        }
+      }
+    },
+    {
+      "name": "11. DELETE Book (Non-existent - 404)",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books/9999",
+          "host": ["{{baseUrl}}"],
+          "path": ["books", "9999"]
+        }
+      }
+    },
+    {
+      "name": "12. Search by Title (search_q=Clean)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books?search_q=Clean",
+          "host": ["{{baseUrl}}"],
+          "path": ["books"],
+          "query": [
+            { "key": "search_q", "value": "Clean" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "13. Sort Ascending (order_by=price&order=ASC)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books?order_by=price&order=ASC",
+          "host": ["{{baseUrl}}"],
+          "path": ["books"],
+          "query": [
+            { "key": "order_by", "value": "price" },
+            { "key": "order", "value": "ASC" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "14. Sort Descending (order_by=price&order=DESC)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books?order_by=price&order=DESC",
+          "host": ["{{baseUrl}}"],
+          "path": ["books"],
+          "query": [
+            { "key": "order_by", "value": "price" },
+            { "key": "order", "value": "DESC" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "15. Pagination (limit=3&offset=0)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books?limit=3&offset=0",
+          "host": ["{{baseUrl}}"],
+          "path": ["books"],
+          "query": [
+            { "key": "limit", "value": "3" },
+            { "key": "offset", "value": "0" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "16. Minimum Price Filter (min_price=500)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books?min_price=500",
+          "host": ["{{baseUrl}}"],
+          "path": ["books"],
+          "query": [
+            { "key": "min_price", "value": "500" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "17. Maximum Price Filter (max_price=400)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books?max_price=400",
+          "host": ["{{baseUrl}}"],
+          "path": ["books"],
+          "query": [
+            { "key": "max_price", "value": "400" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "18. Combined Price Filter (min_price=300&max_price=600)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books?min_price=300&max_price=600",
+          "host": ["{{baseUrl}}"],
+          "path": ["books"],
+          "query": [
+            { "key": "min_price", "value": "300" },
+            { "key": "max_price", "value": "600" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "19. Combined Search, Sort, Pagination",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books?search_q=Design&order_by=price&order=ASC&limit=5&offset=0",
+          "host": ["{{baseUrl}}"],
+          "path": ["books"],
+          "query": [
+            { "key": "search_q", "value": "Design" },
+            { "key": "order_by", "value": "price" },
+            { "key": "order", "value": "ASC" },
+            { "key": "limit", "value": "5" },
+            { "key": "offset", "value": "0" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "20. Invalid Sorting Column - 400",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books?order_by=malicious_column",
+          "host": ["{{baseUrl}}"],
+          "path": ["books"],
+          "query": [
+            { "key": "order_by", "value": "malicious_column" }
+          ]
+        }
+      }
+    },
+    {
+      "name": "21. Invalid Pagination Limit - 400",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/books?limit=-5",
+          "host": ["{{baseUrl}}"],
+          "path": ["books"],
+          "query": [
+            { "key": "limit", "value": "-5" }
+          ]
+        }
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000",
+      "type": "string"
+    }
+  ]
+}

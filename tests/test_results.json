@@ -1,0 +1,605 @@
+[
+  {
+    "id": "TC-01",
+    "scenario": "GET all books (initial fetch)",
+    "method": "GET",
+    "path": "/books",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "response": {
+      "message": "Books retrieved successfully",
+      "count": 10,
+      "data": [
+        {
+          "id": 1,
+          "title": "Python Programming",
+          "author": "John Smith",
+          "price": 450
+        },
+        {
+          "id": 2,
+          "title": "JavaScript: The Good Parts",
+          "author": "Douglas Crockford",
+          "price": 350
+        },
+        {
+          "id": 3,
+          "title": "Clean Code",
+          "author": "Robert C. Martin",
+          "price": 600
+        },
+        {
+          "id": 4,
+          "title": "Design Patterns",
+          "author": "Erich Gamma",
+          "price": 750
+        },
+        {
+          "id": 5,
+          "title": "Node.js Design Patterns",
+          "author": "Mario Casciaro",
+          "price": 520
+        },
+        {
+          "id": 6,
+          "title": "Learning SQL",
+          "author": "Alan Beaulieu",
+          "price": 280
+        },
+        {
+          "id": 7,
+          "title": "Express in Action",
+          "author": "Evan Hahn",
+          "price": 399
+        },
+        {
+          "id": 8,
+          "title": "Database Internals",
+          "author": "Alex Petrov",
+          "price": 820
+        },
+        {
+          "id": 9,
+          "title": "Full Stack Development",
+          "author": "David Flanagan",
+          "price": 480
+        },
+        {
+          "id": 10,
+          "title": "Modern Operating Systems",
+          "author": "Andrew S. Tanenbaum",
+          "price": 950
+        }
+      ]
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "TC-02",
+    "scenario": "GET existing book by ID",
+    "method": "GET",
+    "path": "/books/1",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "response": {
+      "message": "Book retrieved successfully",
+      "data": {
+        "id": 1,
+        "title": "Python Programming",
+        "author": "John Smith",
+        "price": 450
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "TC-03",
+    "scenario": "GET non-existent book by ID",
+    "method": "GET",
+    "path": "/books/9999",
+    "expectedStatus": 404,
+    "actualStatus": 404,
+    "response": {
+      "message": "Book not found"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "TC-04",
+    "scenario": "POST valid book creation",
+    "method": "POST",
+    "path": "/books",
+    "expectedStatus": 201,
+    "actualStatus": 201,
+    "response": {
+      "message": "Book created successfully",
+      "data": {
+        "id": 11,
+        "title": "Mastering TypeScript",
+        "author": "Boris Cherny",
+        "price": 550
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "TC-05",
+    "scenario": "POST missing title validation",
+    "method": "POST",
+    "path": "/books",
+    "expectedStatus": 400,
+    "actualStatus": 400,
+    "response": {
+      "message": "Title, author and valid numeric price are required"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "TC-06",
+    "scenario": "POST missing author validation",
+    "method": "POST",
+    "path": "/books",
+    "expectedStatus": 400,
+    "actualStatus": 400,
+    "response": {
+      "message": "Title, author and valid numeric price are required"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "TC-07",
+    "scenario": "POST non-numeric price validation",
+    "method": "POST",
+    "path": "/books",
+    "expectedStatus": 400,
+    "actualStatus": 400,
+    "response": {
+      "message": "Title, author and valid numeric price are required"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "TC-08",
+    "scenario": "PUT update existing book",
+    "method": "PUT",
+    "path": "/books/1",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "response": {
+      "message": "Book updated successfully",
+      "data": {
+        "id": 1,
+        "title": "Python Programming - Second Edition",
+        "author": "John Smith",
+        "price": 499
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "TC-09",
+    "scenario": "PUT non-existent book",
+    "method": "PUT",
+    "path": "/books/9999",
+    "expectedStatus": 404,
+    "actualStatus": 404,
+    "response": {
+      "message": "Book not found"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "TC-10",
+    "scenario": "DELETE existing book",
+    "method": "DELETE",
+    "path": "/books/2",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "response": {
+      "message": "Book deleted successfully",
+      "data": {
+        "id": 2,
+        "title": "JavaScript: The Good Parts",
+        "author": "Douglas Crockford",
+        "price": 350
+      }
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "TC-11",
+    "scenario": "DELETE non-existent book",
+    "method": "DELETE",
+    "path": "/books/9999",
+    "expectedStatus": 404,
+    "actualStatus": 404,
+    "response": {
+      "message": "Book not found"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "TC-12",
+    "scenario": "Search books by title using search_q",
+    "method": "GET",
+    "path": "/books?search_q=Clean",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "response": {
+      "message": "Books retrieved successfully",
+      "count": 1,
+      "data": [
+        {
+          "id": 3,
+          "title": "Clean Code",
+          "author": "Robert C. Martin",
+          "price": 600
+        }
+      ]
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "TC-13",
+    "scenario": "Sort books ascending using order_by and order",
+    "method": "GET",
+    "path": "/books?order_by=price&order=ASC",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "response": {
+      "message": "Books retrieved successfully",
+      "count": 10,
+      "data": [
+        {
+          "id": 6,
+          "title": "Learning SQL",
+          "author": "Alan Beaulieu",
+          "price": 280
+        },
+        {
+          "id": 7,
+          "title": "Express in Action",
+          "author": "Evan Hahn",
+          "price": 399
+        },
+        {
+          "id": 9,
+          "title": "Full Stack Development",
+          "author": "David Flanagan",
+          "price": 480
+        },
+        {
+          "id": 1,
+          "title": "Python Programming - Second Edition",
+          "author": "John Smith",
+          "price": 499
+        },
+        {
+          "id": 5,
+          "title": "Node.js Design Patterns",
+          "author": "Mario Casciaro",
+          "price": 520
+        },
+        {
+          "id": 11,
+          "title": "Mastering TypeScript",
+          "author": "Boris Cherny",
+          "price": 550
+        },
+        {
+          "id": 3,
+          "title": "Clean Code",
+          "author": "Robert C. Martin",
+          "price": 600
+        },
+        {
+          "id": 4,
+          "title": "Design Patterns",
+          "author": "Erich Gamma",
+          "price": 750
+        },
+        {
+          "id": 8,
+          "title": "Database Internals",
+          "author": "Alex Petrov",
+          "price": 820
+        },
+        {
+          "id": 10,
+          "title": "Modern Operating Systems",
+          "author": "Andrew S. Tanenbaum",
+          "price": 950
+        }
+      ]
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "TC-14",
+    "scenario": "Sort books descending using order_by and order",
+    "method": "GET",
+    "path": "/books?order_by=price&order=DESC",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "response": {
+      "message": "Books retrieved successfully",
+      "count": 10,
+      "data": [
+        {
+          "id": 10,
+          "title": "Modern Operating Systems",
+          "author": "Andrew S. Tanenbaum",
+          "price": 950
+        },
+        {
+          "id": 8,
+          "title": "Database Internals",
+          "author": "Alex Petrov",
+          "price": 820
+        },
+        {
+          "id": 4,
+          "title": "Design Patterns",
+          "author": "Erich Gamma",
+          "price": 750
+        },
+        {
+          "id": 3,
+          "title": "Clean Code",
+          "author": "Robert C. Martin",
+          "price": 600
+        },
+        {
+          "id": 11,
+          "title": "Mastering TypeScript",
+          "author": "Boris Cherny",
+          "price": 550
+        },
+        {
+          "id": 5,
+          "title": "Node.js Design Patterns",
+          "author": "Mario Casciaro",
+          "price": 520
+        },
+        {
+          "id": 1,
+          "title": "Python Programming - Second Edition",
+          "author": "John Smith",
+          "price": 499
+        },
+        {
+          "id": 9,
+          "title": "Full Stack Development",
+          "author": "David Flanagan",
+          "price": 480
+        },
+        {
+          "id": 7,
+          "title": "Express in Action",
+          "author": "Evan Hahn",
+          "price": 399
+        },
+        {
+          "id": 6,
+          "title": "Learning SQL",
+          "author": "Alan Beaulieu",
+          "price": 280
+        }
+      ]
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "TC-15",
+    "scenario": "Pagination with limit and offset",
+    "method": "GET",
+    "path": "/books?limit=3&offset=0",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "response": {
+      "message": "Books retrieved successfully",
+      "count": 3,
+      "data": [
+        {
+          "id": 1,
+          "title": "Python Programming - Second Edition",
+          "author": "John Smith",
+          "price": 499
+        },
+        {
+          "id": 3,
+          "title": "Clean Code",
+          "author": "Robert C. Martin",
+          "price": 600
+        },
+        {
+          "id": 4,
+          "title": "Design Patterns",
+          "author": "Erich Gamma",
+          "price": 750
+        }
+      ]
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "TC-16",
+    "scenario": "Filter books by minimum price (min_price)",
+    "method": "GET",
+    "path": "/books?min_price=500",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "response": {
+      "message": "Books retrieved successfully",
+      "count": 6,
+      "data": [
+        {
+          "id": 3,
+          "title": "Clean Code",
+          "author": "Robert C. Martin",
+          "price": 600
+        },
+        {
+          "id": 4,
+          "title": "Design Patterns",
+          "author": "Erich Gamma",
+          "price": 750
+        },
+        {
+          "id": 5,
+          "title": "Node.js Design Patterns",
+          "author": "Mario Casciaro",
+          "price": 520
+        },
+        {
+          "id": 8,
+          "title": "Database Internals",
+          "author": "Alex Petrov",
+          "price": 820
+        },
+        {
+          "id": 10,
+          "title": "Modern Operating Systems",
+          "author": "Andrew S. Tanenbaum",
+          "price": 950
+        },
+        {
+          "id": 11,
+          "title": "Mastering TypeScript",
+          "author": "Boris Cherny",
+          "price": 550
+        }
+      ]
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "TC-17",
+    "scenario": "Filter books by maximum price (max_price)",
+    "method": "GET",
+    "path": "/books?max_price=400",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "response": {
+      "message": "Books retrieved successfully",
+      "count": 2,
+      "data": [
+        {
+          "id": 6,
+          "title": "Learning SQL",
+          "author": "Alan Beaulieu",
+          "price": 280
+        },
+        {
+          "id": 7,
+          "title": "Express in Action",
+          "author": "Evan Hahn",
+          "price": 399
+        }
+      ]
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "TC-18",
+    "scenario": "Combined price range filter (min_price and max_price)",
+    "method": "GET",
+    "path": "/books?min_price=300&max_price=600",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "response": {
+      "message": "Books retrieved successfully",
+      "count": 6,
+      "data": [
+        {
+          "id": 1,
+          "title": "Python Programming - Second Edition",
+          "author": "John Smith",
+          "price": 499
+        },
+        {
+          "id": 3,
+          "title": "Clean Code",
+          "author": "Robert C. Martin",
+          "price": 600
+        },
+        {
+          "id": 5,
+          "title": "Node.js Design Patterns",
+          "author": "Mario Casciaro",
+          "price": 520
+        },
+        {
+          "id": 7,
+          "title": "Express in Action",
+          "author": "Evan Hahn",
+          "price": 399
+        },
+        {
+          "id": 9,
+          "title": "Full Stack Development",
+          "author": "David Flanagan",
+          "price": 480
+        },
+        {
+          "id": 11,
+          "title": "Mastering TypeScript",
+          "author": "Boris Cherny",
+          "price": 550
+        }
+      ]
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "TC-19",
+    "scenario": "Combined search, sort, and pagination",
+    "method": "GET",
+    "path": "/books?search_q=Design&order_by=price&order=ASC&limit=5&offset=0",
+    "expectedStatus": 200,
+    "actualStatus": 200,
+    "response": {
+      "message": "Books retrieved successfully",
+      "count": 2,
+      "data": [
+        {
+          "id": 5,
+          "title": "Node.js Design Patterns",
+          "author": "Mario Casciaro",
+          "price": 520
+        },
+        {
+          "id": 4,
+          "title": "Design Patterns",
+          "author": "Erich Gamma",
+          "price": 750
+        }
+      ]
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "TC-20",
+    "scenario": "Invalid sorting parameter validation",
+    "method": "GET",
+    "path": "/books?order_by=malicious_column",
+    "expectedStatus": 400,
+    "actualStatus": 400,
+    "response": {
+      "message": "Invalid order_by parameter 'malicious_column'. Allowed columns: id, title, author, price"
+    },
+    "status": "PASS"
+  },
+  {
+    "id": "TC-21",
+    "scenario": "Invalid pagination limit value validation",
+    "method": "GET",
+    "path": "/books?limit=-5",
+    "expectedStatus": 400,
+    "actualStatus": 400,
+    "response": {
+      "message": "Invalid limit parameter. Must be a positive integer."
+    },
+    "status": "PASS"
+  }
+]

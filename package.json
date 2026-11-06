@@ -1,0 +1,24 @@
+{
+  "name": "bdf-lab-03",
+  "version": "1.0.0",
+  "description": "Backend Development Fundamentals Lab 3 - REST API, Query Parameters, Validation, and Debugging",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node tests/api.test.js"
+  },
+  "keywords": [
+    "express",
+    "rest-api",
+    "sqlite3",
+    "validation",
+    "crud",
+    "query-parameters"
+  ],
+  "author": "Appampally Abhilash Reddy",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "sqlite3": "^5.1.7"
+  }
+}
