@@ -6,7 +6,7 @@ const PORT = process.env.PORT || 3000;
 async function startServer() {
   try {
     await initializeDatabase();
-    const server = app.listen(PORT, () => {
+    const server = app.listen(PORT, '0.0.0.0', () => {
       console.log(`====================================================`);
       console.log(`BDF Lab 03 REST API Server started successfully!`);
       console.log(`Server URL: http://localhost:${PORT}`);
